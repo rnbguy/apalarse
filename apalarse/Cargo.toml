@@ -1,0 +1,15 @@
+[package]
+name = "apalarse"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.75"
+glob = "0.3.1"
+itf = "0.1.0"
+serde = { version = "1.0.188", features = ["derive"] }
+serde_json = "1.0.106"
+tempfile = "3.8.0"
+apalarse-derive = { path = "../apalarse-derive" }
