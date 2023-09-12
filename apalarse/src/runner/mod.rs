@@ -6,7 +6,7 @@ use itf::Trace;
 use serde::Deserialize;
 use serde_json::Value;
 
-use crate::tla::{Bool, Context, Expr};
+use crate::tla::{Bool, BoolExpr, Context, Expr};
 use crate::utils::{AContext, AResult};
 
 #[derive(Debug, Default)]
@@ -136,5 +136,29 @@ impl Config {
             config: self,
             context: Default::default(),
         }
+    }
+}
+
+pub trait TlaTS: Sized + for<'de> Deserialize<'de> {
+    type ViewType: Expr;
+
+    fn init(&self) -> Box<dyn BoolExpr>;
+    fn next(&self) -> Box<dyn BoolExpr>;
+    fn inv(&self) -> Box<dyn BoolExpr>;
+    fn view(&self) -> Self::ViewType;
+
+    fn checker(&self, checker: &mut Apalache) -> AResult<Vec<Vec<Self>>> {
+        Ok(checker
+            .check::<_, _, _, _, Self>(
+                &self.init(),
+                &self.next(),
+                &self.inv(),
+                &self.view(),
+                20,
+                5,
+            )?
+            .into_iter()
+            .map(|x| x.states.into_iter().map(|y| y.value).collect::<Vec<_>>())
+            .collect::<Vec<_>>())
     }
 }

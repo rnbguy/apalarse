@@ -1,4 +1,4 @@
-use apalarse::runner::{self, Apalache};
+use apalarse::runner::{Config, TlaTS};
 use apalarse::tla::{
     BoolExpr, Context, Empty, Expr, Int, IntExpr, List, ListExpr, Map, Nat, Set, SetExpr, Symbol,
 };
@@ -12,30 +12,6 @@ struct State {
     fooset: Set<Int>,
     foolist: List<Int>,
     foomap: Map<Int, Int>,
-}
-
-trait TlaTS: Sized + for<'de> Deserialize<'de> {
-    type ViewType: Expr;
-
-    fn init(&self) -> Box<dyn BoolExpr>;
-    fn next(&self) -> Box<dyn BoolExpr>;
-    fn inv(&self) -> Box<dyn BoolExpr>;
-    fn view(&self) -> Self::ViewType;
-
-    fn checker(&self, checker: &mut Apalache) -> AResult<Vec<Vec<Self>>> {
-        Ok(checker
-            .check::<_, _, _, _, Self>(
-                &self.init(),
-                &self.next(),
-                &self.inv(),
-                &self.view(),
-                20,
-                5,
-            )?
-            .into_iter()
-            .map(|x| x.states.into_iter().map(|y| y.value).collect::<Vec<_>>())
-            .collect::<Vec<_>>())
-    }
 }
 
 impl TlaTS for State {
@@ -99,7 +75,7 @@ impl TlaTS for State {
 }
 
 fn main() -> AResult<()> {
-    let config = runner::Config::default();
+    let config = Config::default();
     let mut checker = config.checker();
 
     let state = State::variable(&mut checker.context);
