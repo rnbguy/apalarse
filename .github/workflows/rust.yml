@@ -3,6 +3,11 @@ name: Rust
 on:
   push:
     branches: ["main"]
+    paths:
+      - "apalarse/**"
+      - "apalarse-derive/**"
+      - "Cargo.toml"
+      - ".github/**"
   pull_request:
     branches: ["main"]
 
