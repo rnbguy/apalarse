@@ -89,8 +89,8 @@ impl Apalache {
             println!("No CEX");
 
             let file_path = temp_dir.path().join(RUN_DIR).join("example.itf.json");
-            let file = File::open(file_path)?;
-            let trace: Trace<Value> = itf::trace_from_reader(file)?;
+            let itf_str = std::fs::read_to_string(file_path)?;
+            let trace: Trace<Value> = itf::trace_from_str(&itf_str)?;
             println!("{:?}", trace);
             Err(anyhow::Error::msg("No CEX"))
         } else if exit_status.code() == Some(12) {
@@ -114,8 +114,8 @@ impl Apalache {
             Ok(violations
                 .into_iter()
                 .map(|path| {
-                    let file = File::open(path)?;
-                    Ok(itf::trace_from_reader(file)?)
+                    let itf_str = std::fs::read_to_string(path)?;
+                    Ok(itf::trace_from_str(&itf_str)?)
                 })
                 .collect::<AResult<Vec<_>>>()?)
         } else {
