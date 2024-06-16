@@ -1,15 +1,15 @@
 [package]
-name = "apalarse"
-version = "0.1.0"
-edition = "2021"
+name    = "apalarse"
+version = { workspace = true }
+edition = { workspace = true }
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "1.0.75"
-glob = "0.3.1"
-itf = "0.2.2"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-tempfile = "3.8"
+anyhow          = "1.0.75"
+glob            = "0.3.1"
+itf             = "0.2.2"
+serde           = { version = "1", features = [ "derive" ] }
+serde_json      = "1"
+tempfile        = "3.8"
 apalarse-derive = { path = "../apalarse-derive" }
