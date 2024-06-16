@@ -1,0 +1,29 @@
+[tasks.rustfmt]
+command = "cargo"
+args    = [ "fmt" ]
+
+[tasks.taplo]
+command = "taplo"
+args    = [ "fmt" ]
+
+[tasks.prettier]
+command = "prettier"
+args    = [ "--write", "." ]
+
+[tasks.format]
+dependencies = [
+  "rustfmt",
+  "taplo",
+  "prettier",
+]
+
+[tasks.test]
+command = "cargo"
+args    = [ "nextest", "run" ]
+
+[tasks.ready]
+dependencies = [
+  "format",
+  "clippy",
+  "test",
+]
