@@ -9,8 +9,8 @@ pub enum QuantEnum {
 impl QuantEnum {
     fn char(&self) -> char {
         match self {
-            QuantEnum::ForAll => 'A',
-            QuantEnum::Exists => 'E',
+            Self::ForAll => 'A',
+            Self::Exists => 'E',
         }
     }
 }
@@ -33,16 +33,16 @@ where
     P: Fn(Variable<S::ElemType>) -> U,
     U: BoolExpr,
 {
-    pub fn for_all(set: S, predicate: P) -> Quant<S, P, U> {
-        Quant {
+    pub fn for_all(set: S, predicate: P) -> Self {
+        Self {
             _type: QuantEnum::ForAll,
             set,
             predicate,
         }
     }
 
-    pub fn exists(set: S, predicate: P) -> Quant<S, P, U> {
-        Quant {
+    pub fn exists(set: S, predicate: P) -> Self {
+        Self {
             _type: QuantEnum::Exists,
             set,
             predicate,

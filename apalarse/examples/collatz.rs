@@ -23,9 +23,9 @@ fn main() -> AResult<()> {
         .into_iter()
         .enumerate()
     {
-        println!("counterexample {}", i);
+        println!("counterexample {i}");
         for (j, state) in cex.states.into_iter().enumerate() {
-            println!("  state {}", j);
+            println!("  state {j}");
             println!("    {}: {}", x, x.value(&state.value)?);
         }
     }

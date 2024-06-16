@@ -3,10 +3,10 @@ mod in_set;
 mod not_in_set;
 mod quant;
 
-pub(crate) use if_then_else::IfThenElse;
-pub(crate) use in_set::InSet;
-pub(crate) use not_in_set::NotInSet;
-pub(crate) use quant::Quant;
+pub use if_then_else::IfThenElse;
+pub use in_set::InSet;
+pub use not_in_set::NotInSet;
+pub use quant::Quant;
 
 use crate::tla::macros::{
     binary_expr_func, binary_expr_struct, generic_binary_expr_struct, unary_expr_func,

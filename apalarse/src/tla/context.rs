@@ -1,5 +1,5 @@
+use core::fmt::{Debug, Write};
 use std::collections::{HashMap, HashSet};
-use std::fmt::{Debug, Write};
 
 use crate::tla::{Expr, TlaType, Variable};
 use crate::utils::AResult;
@@ -54,7 +54,7 @@ impl Context {
             return Ok(String::new());
         }
         let mut rt = String::from("EXTENDS");
-        for m in self.modules.iter() {
+        for m in &self.modules {
             write!(rt, " {m},")?;
         }
         rt.pop();

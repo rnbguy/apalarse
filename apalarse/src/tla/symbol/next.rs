@@ -12,8 +12,9 @@ impl<T> Next<T>
 where
     T: TlaType,
 {
-    pub fn new(inner: Variable<T>) -> Next<T> {
-        Next { inner }
+    #[must_use]
+    pub fn new(inner: Variable<T>) -> Self {
+        Self { inner }
     }
 }
 

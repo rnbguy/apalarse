@@ -1,7 +1,7 @@
 mod constant;
 mod expr;
 
-pub(crate) use expr::{Eq, InSet, Neq, NotInSet, Quant};
+pub use expr::{Eq, InSet, Neq, NotInSet, Quant};
 
 #[cfg(test)]
 mod test;

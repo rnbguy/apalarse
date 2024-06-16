@@ -82,9 +82,9 @@ fn main() -> AResult<()> {
 
     // note: it returns step assignments in the original state struct
     for (i, cex) in state.checker(&mut checker)?.into_iter().enumerate() {
-        println!("counterexample {}", i);
+        println!("counterexample {i}");
         for (j, step) in cex.into_iter().enumerate() {
-            println!("  step {}: {:?}", j, step);
+            println!("  step {j}: {step:?}");
         }
     }
 

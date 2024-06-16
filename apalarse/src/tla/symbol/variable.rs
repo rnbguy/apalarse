@@ -1,5 +1,5 @@
-use std::fmt::Display;
-use std::marker::PhantomData;
+use core::fmt::Display;
+use core::marker::PhantomData;
 
 use serde_json::Value;
 
@@ -28,6 +28,7 @@ impl<T> Variable<T>
 where
     T: TlaType,
 {
+    #[must_use]
     pub fn is_global(&self) -> bool {
         matches!(self.scope, Scope::Global)
     }
@@ -37,7 +38,7 @@ impl<T> Display for Variable<T>
 where
     T: TlaType,
 {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
         write!(f, "{}", self.name())
     }
 }
@@ -64,14 +65,16 @@ impl<T> Variable<T>
 where
     T: TlaType,
 {
+    #[must_use]
     pub fn global(id: u64) -> Self {
         Self {
             id,
-            name: format!("global_{}", id),
+            name: format!("global_{id}"),
             scope: Scope::Global,
             _phantom: Default::default(),
         }
     }
+    #[must_use]
     pub fn global_with_name(id: u64, name: &str) -> Self {
         Self {
             id,
@@ -81,15 +84,17 @@ where
         }
     }
 
+    #[must_use]
     pub fn bound(id: u64) -> Self {
         Self {
             id,
-            name: format!("bound_{}", id),
+            name: format!("bound_{id}"),
             scope: Scope::Bound,
             _phantom: Default::default(),
         }
     }
 
+    #[must_use]
     pub fn map(id: u64) -> Self {
         Self {
             id,
@@ -99,18 +104,22 @@ where
         }
     }
 
+    #[must_use]
     pub fn next(&self) -> Next<T> {
         Next::new(self.clone())
     }
 
+    #[must_use]
     pub fn unchanged(&self) -> Unchanged<T> {
         Unchanged::new(self.clone())
     }
 
+    #[must_use]
     pub fn name(&self) -> String {
         self.name.clone()
     }
 
+    #[must_use]
     pub fn id(&self) -> u64 {
         self.id
     }

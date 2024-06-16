@@ -5,9 +5,9 @@ mod variable;
 #[cfg(test)]
 mod test;
 
-pub(crate) use next::Next;
+pub use next::Next;
 use serde::{Deserialize, Deserializer};
-pub(crate) use unchanged::Unchanged;
+pub use unchanged::Unchanged;
 pub use variable::Variable;
 
 use crate::tla::TlaType;
@@ -30,7 +30,7 @@ where
         D: Deserializer<'a>,
     {
         let v = T::deserialize(deserializer)?;
-        Ok(Symbol::Concrete(v))
+        Ok(Self::Concrete(v))
     }
 }
 
@@ -38,21 +38,22 @@ impl<T> Symbol<T>
 where
     T: TlaType,
 {
+    #[must_use]
     pub fn new(var: Variable<T>) -> Self {
-        Symbol::Variable(var)
+        Self::Variable(var)
     }
 
     pub fn concrete(&self) -> &T {
         match self {
-            Symbol::Variable(_) => unimplemented!(),
-            Symbol::Concrete(v) => v,
+            Self::Variable(_) => unimplemented!(),
+            Self::Concrete(v) => v,
         }
     }
 
     pub fn variable(&self) -> Variable<T> {
         match self {
-            Symbol::Variable(v) => v.clone(),
-            Symbol::Concrete(_) => unimplemented!(),
+            Self::Variable(v) => v.clone(),
+            Self::Concrete(_) => unimplemented!(),
         }
     }
 }

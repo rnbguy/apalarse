@@ -1,5 +1,5 @@
 [package]
-name    = "apalarse"
+name         = "apalarse"
 version      = { workspace = true }
 authors      = { workspace = true }
 edition      = { workspace = true }

@@ -17,8 +17,8 @@ where
     P: Fn(Variable<S::ElemType>) -> U,
     U: BoolExpr,
 {
-    pub fn new(set: S, predicate: P) -> Filter<S, P, U> {
-        Filter { set, predicate }
+    pub fn new(set: S, predicate: P) -> Self {
+        Self { set, predicate }
     }
 }
 

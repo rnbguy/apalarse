@@ -19,7 +19,7 @@ where
     U: Expr<Output = L::ElemType>,
 {
     pub fn new(inner: L, key: Int, value: P) -> Self {
-        Replace { inner, key, value }
+        Self { inner, key, value }
     }
 }
 
@@ -38,7 +38,7 @@ where
             "[{} EXCEPT ![{}] = {}]",
             self.inner.tla_expr(cx),
             self.key.tla_expr(cx),
-            (self.value)(new_var.clone()).tla_expr(cx),
+            (self.value)(new_var).tla_expr(cx),
         );
         cx.exit_scope();
         rt

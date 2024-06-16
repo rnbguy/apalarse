@@ -30,10 +30,12 @@ pub struct Set<T> {
 }
 
 impl<T> Set<T> {
+    #[must_use]
     pub fn from(inner: Vec<T>) -> Self {
         Self { inner }
     }
 
+    #[must_use]
     pub fn empty() -> Self {
         Self { inner: vec![] }
     }
@@ -46,10 +48,12 @@ pub struct Map<K, V> {
 }
 
 impl<K, V> Map<K, V> {
+    #[must_use]
     pub fn from(inner: Vec<(K, V)>) -> Self {
         Self { inner }
     }
 
+    #[must_use]
     pub fn empty() -> Self {
         Self { inner: vec![] }
     }

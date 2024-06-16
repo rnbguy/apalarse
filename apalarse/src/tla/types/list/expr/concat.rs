@@ -15,8 +15,8 @@ where
     L: ListExpr,
     R: ListExpr<ElemType = L::ElemType>,
 {
-    pub fn new(lhs: L, rhs: R) -> Concat<L, R> {
-        Concat { lhs, rhs }
+    pub fn new(lhs: L, rhs: R) -> Self {
+        Self { lhs, rhs }
     }
 }
 

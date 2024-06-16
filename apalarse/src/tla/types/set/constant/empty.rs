@@ -1,4 +1,4 @@
-use std::marker::PhantomData;
+use core::marker::PhantomData;
 
 use crate::tla::{Context, Expr, Set, TlaType};
 
@@ -14,6 +14,7 @@ impl<T> Empty<T>
 where
     T: TlaType,
 {
+    #[must_use]
     pub fn new() -> Self {
         Self {
             _phantom: PhantomData,

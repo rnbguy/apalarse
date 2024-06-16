@@ -87,5 +87,5 @@ fn test_expr() {
     assert_eq!(s.equal(s.clone()).tla_expr_test(), "({1} = {1})");
     assert_eq!(s.nequal(s.clone()).tla_expr_test(), "({1} /= {1})");
     assert_eq!(1.is_in(s.clone()).tla_expr_test(), "(1 \\in {1})");
-    assert_eq!(1.not_in(s.clone()).tla_expr_test(), "(1 \\notin {1})");
+    assert_eq!(1.not_in(s).tla_expr_test(), "(1 \\notin {1})");
 }

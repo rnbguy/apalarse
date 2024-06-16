@@ -12,8 +12,8 @@ impl<S> Cardinality<S>
 where
     S: SetExpr,
 {
-    pub fn new(inner: S) -> Cardinality<S> {
-        Cardinality { inner }
+    pub fn new(inner: S) -> Self {
+        Self { inner }
     }
 }
 

@@ -13,8 +13,8 @@ impl<L> ListGet<L>
 where
     L: ListExpr,
 {
-    pub fn new(inner: L, key: Int) -> ListGet<L> {
-        ListGet { inner, key }
+    pub fn new(inner: L, key: Int) -> Self {
+        Self { inner, key }
     }
 }
 

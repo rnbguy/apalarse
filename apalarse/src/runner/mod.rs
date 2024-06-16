@@ -91,7 +91,7 @@ impl Apalache {
             let file_path = temp_dir.path().join(RUN_DIR).join("example.itf.json");
             let itf_str = std::fs::read_to_string(file_path)?;
             let trace: Trace<Value> = itf::trace_from_str(&itf_str)?;
-            println!("{:?}", trace);
+            println!("{trace:?}");
             Err(anyhow::Error::msg("No CEX"))
         } else if exit_status.code() == Some(12) {
             println!("Found CEX");
@@ -131,6 +131,7 @@ impl Apalache {
 pub struct Config {}
 
 impl Config {
+    #[must_use]
     pub fn checker(self) -> Apalache {
         Apalache {
             config: self,

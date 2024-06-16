@@ -17,8 +17,8 @@ where
     P: Fn(Variable<S::ElemType>) -> U,
     U: Expr,
 {
-    pub fn new(set: S, predicate: P) -> SetMap<S, P, U> {
-        SetMap { set, predicate }
+    pub fn new(set: S, predicate: P) -> Self {
+        Self { set, predicate }
     }
 }
 

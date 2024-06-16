@@ -15,8 +15,8 @@ where
     L: SetExpr,
     R: SetExpr<ElemType = L::ElemType>,
 {
-    pub fn new(lhs: L, rhs: R) -> Intersect<L, R> {
-        Intersect { lhs, rhs }
+    pub fn new(lhs: L, rhs: R) -> Self {
+        Self { lhs, rhs }
     }
 }
 

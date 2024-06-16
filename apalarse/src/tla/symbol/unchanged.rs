@@ -12,8 +12,9 @@ impl<T> Unchanged<T>
 where
     T: TlaType,
 {
-    pub fn new(inner: Variable<T>) -> Unchanged<T> {
-        Unchanged { inner }
+    #[must_use]
+    pub fn new(inner: Variable<T>) -> Self {
+        Self { inner }
     }
 }
 

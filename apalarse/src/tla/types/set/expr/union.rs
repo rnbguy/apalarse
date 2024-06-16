@@ -15,8 +15,8 @@ where
     L: SetExpr,
     R: SetExpr<ElemType = L::ElemType>,
 {
-    pub fn new(lhs: L, rhs: R) -> Union<L, R> {
-        Union { lhs, rhs }
+    pub fn new(lhs: L, rhs: R) -> Self {
+        Self { lhs, rhs }
     }
 }
 

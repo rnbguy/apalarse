@@ -24,6 +24,6 @@ where
     }
 
     fn evaluate(&self) -> Self::Output {
-        self.iter().map(|x| x.evaluate()).collect()
+        self.iter().map(crate::tla::expr::Expr::evaluate).collect()
     }
 }

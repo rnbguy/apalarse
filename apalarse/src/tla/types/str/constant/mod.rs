@@ -11,10 +11,10 @@ impl TlaType for Str {
 }
 
 impl Expr for Str {
-    type Output = Str;
+    type Output = Self;
 
     fn tla_expr(&self, _cx: &mut Context) -> String {
-        format!("\"{}\"", self)
+        format!("\"{self}\"")
     }
 
     fn evaluate(&self) -> Self::Output {

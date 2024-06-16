@@ -15,8 +15,8 @@ where
     S: SetExpr,
     U: SetExpr<ElemType = S::ElemType>,
 {
-    pub fn new(lhs: S, rhs: U) -> SubsetEq<S, U> {
-        SubsetEq { lhs, rhs }
+    pub fn new(lhs: S, rhs: U) -> Self {
+        Self { lhs, rhs }
     }
 }
 
