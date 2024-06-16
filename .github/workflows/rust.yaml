@@ -11,21 +11,37 @@ on:
   pull_request:
     branches: ["main"]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
-  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: 0
+  CARGO_PROFILE_DEV_DEBUG: 1
+  CARGO_PROFILE_RELEASE_DEBUG: 1
+  RUST_BACKTRACE: short
+  CARGO_NET_RETRY: 10
+  RUSTUP_MAX_RETRIES: 10
+  RUSTFLAGS: -Dwarnings
 
 jobs:
   cargo-jobs:
-    strategy:
-      matrix:
-        subcommand: ["build", "test", "clippy", "fmt"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
+
+      - name: Install Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Install `nextest` from crates.io
+        uses: baptiste0928/cargo-install@v3
         with:
-          toolchain: nightly
-      - uses: Swatinem/rust-cache@v2
-      - uses: actions-rs/cargo@v1
-        with:
-          command: ${{ matrix.subcommand }}
+          crate: cargo-nextest
+          locked: false
+
+      - name: Run cargo commands
+        run: |
+          cargo build
+          cargo test
+          cargo clippy -- -D
+          cargo nextest r --no-capture
