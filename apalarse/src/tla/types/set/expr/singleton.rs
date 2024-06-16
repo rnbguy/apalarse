@@ -12,7 +12,7 @@ impl<T> Singleton<T>
 where
     T: Expr,
 {
-    pub fn new(elem: T) -> Self {
+    pub const fn new(elem: T) -> Self {
         Self { elem }
     }
 }

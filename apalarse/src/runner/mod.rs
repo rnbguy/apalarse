@@ -24,6 +24,10 @@ const INV_OP: &str = "Apalarse_Inv";
 const VIEW_OP: &str = "Apalarse_View";
 
 impl Apalache {
+    /// Run the model checker on the TLA+ spec.
+    ///
+    /// # Errors
+    /// If the model checker fails.
     pub fn check<E1, E2, E3, E4, ST>(
         &mut self,
         init: &E1,
@@ -105,10 +109,7 @@ impl Apalache {
 
             let violations = glob::glob(glob_pattern)
                 .context("Failed to read glob pattern")?
-                .filter(|entry| match entry {
-                    Ok(path) => !path.eq(&ignore_path),
-                    Err(_) => true,
-                })
+                .filter(|entry| entry.as_ref().map_or(true, |path| !path.eq(&ignore_path)))
                 .collect::<Result<Vec<_>, _>>()?;
 
             Ok(violations
@@ -135,7 +136,7 @@ impl Config {
     pub fn checker(self) -> Apalache {
         Apalache {
             config: self,
-            context: Default::default(),
+            context: Context::default(),
         }
     }
 }
@@ -148,6 +149,10 @@ pub trait TlaTS: Sized + for<'de> Deserialize<'de> {
     fn inv(&self) -> Box<dyn BoolExpr>;
     fn view(&self) -> Self::ViewType;
 
+    /// Run the model checker on the TLA+ spec.
+    ///
+    /// # Errors
+    /// If the model checker fails.
     fn checker(&self, checker: &mut Apalache) -> AResult<Vec<Vec<Self>>> {
         Ok(checker
             .check::<_, _, _, _, Self>(

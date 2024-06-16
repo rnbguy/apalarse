@@ -12,6 +12,10 @@ pub struct Context {
 }
 
 impl Context {
+    /// Add a global variable to the context.
+    ///
+    /// # Panics
+    /// If variable is not global.
     pub fn add_global_variable<T>(&mut self, var: &Variable<T>)
     where
         T: TlaType,
@@ -37,6 +41,10 @@ impl Context {
         )
     }
 
+    /// Returns global variables in TLA+ format.
+    ///
+    /// # Errors
+    /// If writing to the string fails.
     pub fn tla_variables(&self) -> AResult<String> {
         if self.global_variables.is_empty() {
             return Ok(String::new());
@@ -49,6 +57,10 @@ impl Context {
         Ok(rt)
     }
 
+    /// Returns modules in TLA+ format.
+    ///
+    /// # Errors
+    /// If writing to the string fails.
     pub fn tla_modules(&self) -> AResult<String> {
         if self.modules.is_empty() {
             return Ok(String::new());

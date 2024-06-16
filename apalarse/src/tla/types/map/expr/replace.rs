@@ -20,7 +20,7 @@ where
     VE: Fn(Variable<FE::ValueType>) -> U,
     U: Expr<Output = FE::ValueType>,
 {
-    pub fn new(func: FE, key: KE, value: VE) -> Self {
+    pub const fn new(func: FE, key: KE, value: VE) -> Self {
         Self { func, key, value }
     }
 }

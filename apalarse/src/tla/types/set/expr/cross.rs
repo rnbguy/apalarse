@@ -15,7 +15,7 @@ where
     S: SetExpr,
     U: SetExpr,
 {
-    pub fn new(lhs: S, rhs: U) -> Self {
+    pub const fn new(lhs: S, rhs: U) -> Self {
         Self { lhs, rhs }
     }
 }

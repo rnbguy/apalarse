@@ -15,7 +15,7 @@ where
     FE: MapExpr,
     KE: Expr<Output = FE::KeyType>,
 {
-    pub fn new(func: FE, key: KE) -> Self {
+    pub const fn new(func: FE, key: KE) -> Self {
         Self { func, key }
     }
 }

@@ -17,7 +17,7 @@ where
     P: Fn(Variable<S::ElemType>) -> U,
     U: Expr,
 {
-    pub fn new(set: S, predicate: P) -> Self {
+    pub const fn new(set: S, predicate: P) -> Self {
         Self { set, predicate }
     }
 }

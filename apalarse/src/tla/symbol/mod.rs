@@ -39,7 +39,7 @@ where
     T: TlaType,
 {
     #[must_use]
-    pub fn new(var: Variable<T>) -> Self {
+    pub const fn new(var: Variable<T>) -> Self {
         Self::Variable(var)
     }
 

@@ -12,7 +12,7 @@ impl<L> ListDomain<L>
 where
     L: ListExpr,
 {
-    pub fn new(inner: L) -> Self {
+    pub const fn new(inner: L) -> Self {
         Self { inner }
     }
 }

@@ -4,6 +4,10 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, Fields, ItemStruct};
 
+/// This macro is used to derive a TLA+ state.
+///
+/// # Panics
+/// If the struct has unnamed fields.
 #[proc_macro_attribute]
 pub fn tla_state(_attrs: TokenStream, input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as ItemStruct);
@@ -40,6 +44,10 @@ pub fn tla_state(_attrs: TokenStream, input: TokenStream) -> TokenStream {
     TokenStream::from(expanded)
 }
 
+/// This macro is used to derive a TLA+ record.
+///
+/// # Panics
+/// If the struct has unnamed fields.
 #[proc_macro_attribute]
 pub fn tla_record(_attrs: TokenStream, input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as ItemStruct);

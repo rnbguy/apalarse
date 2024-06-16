@@ -29,14 +29,15 @@ pub struct Set<T> {
     inner: Vec<T>,
 }
 
-impl<T> Set<T> {
-    #[must_use]
-    pub fn from(inner: Vec<T>) -> Self {
+impl<T> From<Vec<T>> for Set<T> {
+    fn from(inner: Vec<T>) -> Self {
         Self { inner }
     }
+}
 
+impl<T> Set<T> {
     #[must_use]
-    pub fn empty() -> Self {
+    pub const fn empty() -> Self {
         Self { inner: vec![] }
     }
 }
@@ -47,14 +48,15 @@ pub struct Map<K, V> {
     inner: Vec<(K, V)>,
 }
 
-impl<K, V> Map<K, V> {
-    #[must_use]
-    pub fn from(inner: Vec<(K, V)>) -> Self {
+impl<K, V> From<Vec<(K, V)>> for Map<K, V> {
+    fn from(inner: Vec<(K, V)>) -> Self {
         Self { inner }
     }
+}
 
+impl<K, V> Map<K, V> {
     #[must_use]
-    pub fn empty() -> Self {
+    pub const fn empty() -> Self {
         Self { inner: vec![] }
     }
 }

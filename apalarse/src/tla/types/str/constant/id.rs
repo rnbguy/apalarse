@@ -14,7 +14,7 @@ impl<T> Id<T>
 where
     T: Serialize + for<'a> Deserialize<'a> + Clone,
 {
-    fn new(inner: T) -> Self {
+    const fn new(inner: T) -> Self {
         Self { inner }
     }
 }

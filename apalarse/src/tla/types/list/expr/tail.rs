@@ -12,7 +12,7 @@ impl<E> Tail<E>
 where
     E: ListExpr,
 {
-    pub fn new(inner: E) -> Self {
+    pub const fn new(inner: E) -> Self {
         Self { inner }
     }
 }

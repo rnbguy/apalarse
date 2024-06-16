@@ -18,7 +18,7 @@ where
     P: Expr,
     N: Expr<Output = P::Output>,
 {
-    pub fn new(cond: C, lhs: P, rhs: N) -> Self {
+    pub const fn new(cond: C, lhs: P, rhs: N) -> Self {
         Self {
             cond,
             pos: lhs,

@@ -13,7 +13,7 @@ where
     T: TlaType,
 {
     #[must_use]
-    pub fn new(inner: Variable<T>) -> Self {
+    pub const fn new(inner: Variable<T>) -> Self {
         Self { inner }
     }
 }

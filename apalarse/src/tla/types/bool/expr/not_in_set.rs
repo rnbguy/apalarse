@@ -15,7 +15,7 @@ where
     E: Expr,
     S: SetExpr<ElemType = E::Output>,
 {
-    pub fn new(elem: E, set: S) -> Self {
+    pub const fn new(elem: E, set: S) -> Self {
         Self { elem, set }
     }
 }

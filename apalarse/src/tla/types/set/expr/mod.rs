@@ -27,18 +27,16 @@ pub trait SetExpr: Expr {
 
     fn tla_contains<E>(&self, elem: E) -> InSet<E, Self>
     where
-        Self: Clone,
+        Self: Clone + Expr<Output = Set<Self::ElemType>>,
         E: Expr<Output = Self::ElemType>,
-        Self: Expr<Output = Set<Self::ElemType>>,
     {
         InSet::new(elem, self.clone())
     }
 
     fn tla_not_contains<E>(&self, elem: E) -> NotInSet<E, Self>
     where
-        Self: Clone,
+        Self: Clone + Expr<Output = Set<Self::ElemType>>,
         E: Expr<Output = Self::ElemType>,
-        Self: Expr<Output = Set<Self::ElemType>>,
     {
         NotInSet::new(elem, self.clone())
     }
@@ -129,8 +127,7 @@ pub trait SetExpr: Expr {
 
     fn cross<T, U, V>(&self, other: U) -> Cross<Self, U>
     where
-        Self: Clone,
-        Self: SetExpr<ElemType = T>,
+        Self: Clone + SetExpr<ElemType = T>,
         U: SetExpr<ElemType = V>,
     {
         Cross::new(self.clone(), other)
@@ -138,8 +135,7 @@ pub trait SetExpr: Expr {
 
     fn subseteq<U, T>(&self, other: U) -> SubsetEq<Self, U>
     where
-        Self: Clone,
-        Self: SetExpr<ElemType = T>,
+        Self: Clone + SetExpr<ElemType = T>,
         U: SetExpr<ElemType = T>,
     {
         SubsetEq::new(self.clone(), other)

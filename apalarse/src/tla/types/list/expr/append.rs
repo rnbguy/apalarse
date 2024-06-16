@@ -15,7 +15,7 @@ where
     E: Expr,
     L: ListExpr<ElemType = E::Output>,
 {
-    pub fn new(list: L, elem: E) -> Self {
+    pub const fn new(list: L, elem: E) -> Self {
         Self { list, elem }
     }
 }

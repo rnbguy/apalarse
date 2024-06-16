@@ -55,7 +55,7 @@ fn test_symbol() {
         }
     }
 
-    let state_variable = State::variable(&mut Default::default());
+    let state_variable = State::variable(&mut Context::default());
     assert_eq!(state_variable.foo.variable().name(), "foo");
     assert_eq!(state_variable.bar.variable().name(), "bar");
 

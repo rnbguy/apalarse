@@ -12,7 +12,7 @@ impl<FE> Domain<FE>
 where
     FE: MapExpr,
 {
-    pub fn new(inner: FE) -> Self {
+    pub const fn new(inner: FE) -> Self {
         Self { inner }
     }
 }

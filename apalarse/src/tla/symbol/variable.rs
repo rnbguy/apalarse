@@ -29,7 +29,7 @@ where
     T: TlaType,
 {
     #[must_use]
-    pub fn is_global(&self) -> bool {
+    pub const fn is_global(&self) -> bool {
         matches!(self.scope, Scope::Global)
     }
 }
@@ -71,7 +71,7 @@ where
             id,
             name: format!("global_{id}"),
             scope: Scope::Global,
-            _phantom: Default::default(),
+            _phantom: PhantomData,
         }
     }
     #[must_use]
@@ -80,7 +80,7 @@ where
             id,
             name: name.into(),
             scope: Scope::Global,
-            _phantom: Default::default(),
+            _phantom: PhantomData,
         }
     }
 
@@ -90,7 +90,7 @@ where
             id,
             name: format!("bound_{id}"),
             scope: Scope::Bound,
-            _phantom: Default::default(),
+            _phantom: PhantomData,
         }
     }
 
@@ -100,7 +100,7 @@ where
             id,
             name: "@".into(),
             scope: Scope::Map,
-            _phantom: Default::default(),
+            _phantom: PhantomData,
         }
     }
 
@@ -120,10 +120,14 @@ where
     }
 
     #[must_use]
-    pub fn id(&self) -> u64 {
+    pub const fn id(&self) -> u64 {
         self.id
     }
 
+    /// Get the value of the variable in the given state.
+    ///
+    /// # Errors
+    /// If the variable is not found in the state.
     pub fn value(&self, state: &Value) -> AResult<Value> {
         state
             .as_object()

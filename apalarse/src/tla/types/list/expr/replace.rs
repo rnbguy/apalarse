@@ -18,7 +18,7 @@ where
     P: Fn(Variable<L::ElemType>) -> U,
     U: Expr<Output = L::ElemType>,
 {
-    pub fn new(inner: L, key: Int, value: P) -> Self {
+    pub const fn new(inner: L, key: Int, value: P) -> Self {
         Self { inner, key, value }
     }
 }

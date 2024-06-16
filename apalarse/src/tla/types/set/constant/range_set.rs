@@ -8,7 +8,7 @@ pub struct RangeSet {
 
 impl RangeSet {
     #[must_use]
-    pub fn new(start: i64, end: i64) -> Self {
+    pub const fn new(start: i64, end: i64) -> Self {
         Self { start, end }
     }
 }

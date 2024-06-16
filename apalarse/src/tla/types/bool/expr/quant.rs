@@ -7,7 +7,7 @@ pub enum QuantEnum {
 }
 
 impl QuantEnum {
-    fn char(&self) -> char {
+    const fn char(&self) -> char {
         match self {
             Self::ForAll => 'A',
             Self::Exists => 'E',
@@ -22,7 +22,7 @@ where
     P: Fn(Variable<S::ElemType>) -> U,
     U: BoolExpr,
 {
-    pub _type: QuantEnum,
+    pub r#type: QuantEnum,
     pub set: S,
     pub predicate: P,
 }
@@ -33,17 +33,17 @@ where
     P: Fn(Variable<S::ElemType>) -> U,
     U: BoolExpr,
 {
-    pub fn for_all(set: S, predicate: P) -> Self {
+    pub const fn for_all(set: S, predicate: P) -> Self {
         Self {
-            _type: QuantEnum::ForAll,
+            r#type: QuantEnum::ForAll,
             set,
             predicate,
         }
     }
 
-    pub fn exists(set: S, predicate: P) -> Self {
+    pub const fn exists(set: S, predicate: P) -> Self {
         Self {
-            _type: QuantEnum::Exists,
+            r#type: QuantEnum::Exists,
             set,
             predicate,
         }
@@ -63,7 +63,7 @@ where
         let new_var = cx.bound_var();
         let rt = format!(
             "(\\{} {} \\in {}: {})",
-            self._type.char(),
+            self.r#type.char(),
             new_var.tla_expr(cx),
             self.set.tla_expr(cx),
             (self.predicate)(new_var.clone()).tla_expr(cx)

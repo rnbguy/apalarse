@@ -4,13 +4,13 @@ use apalarse::utils::AResult;
 use serde_json::Value;
 
 fn main() -> AResult<()> {
-    let config = runner::Config::default();
-    let mut checker = config.checker();
-
     struct Vars {
         x: Variable<Int>,
         y: Variable<Int>,
     }
+
+    let config = runner::Config::default();
+    let mut checker = config.checker();
 
     let vars = Vars {
         x: checker.context.var(),

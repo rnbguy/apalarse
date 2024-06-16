@@ -12,7 +12,7 @@ macro_rules! unary_expr_struct {
         where
             T: $input_trait,
         {
-            pub fn new(inner: T) -> $name<T> {
+            pub const fn new(inner: T) -> $name<T> {
                 $name { inner }
             }
         }
@@ -65,7 +65,7 @@ macro_rules! generic_binary_expr_struct {
             Lhs: Expr,
             Rhs: Expr<Output = Lhs::Output>,
         {
-            pub fn new(lhs: Lhs, rhs: Rhs) -> $name<Lhs, Rhs> {
+            pub const fn new(lhs: Lhs, rhs: Rhs) -> $name<Lhs, Rhs> {
                 $name { lhs, rhs }
             }
         }
@@ -113,7 +113,7 @@ macro_rules! binary_expr_struct {
             Lhs: $input_trait,
             Rhs: $input_trait,
         {
-            pub fn new(lhs: Lhs, rhs: Rhs) -> $name<Lhs, Rhs> {
+            pub const fn new(lhs: Lhs, rhs: Rhs) -> $name<Lhs, Rhs> {
                 $name { lhs, rhs }
             }
         }
